@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext } from "react";
 import context from "react-bootstrap/esm/AccordionContext";
-import { Route, Redirect, Navigate, redirect } from "react-router-dom";
+import { Route, Redirect, redirect, useNavigate } from "react-router-dom";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
@@ -43,14 +43,15 @@ export function connection(url, body){
             await AsyncStorage.setItem ('@Token', value);
             await AsyncStorage.setItem ('@Logged', true);
             console.log(1);
+            useNavigate("/home")
             
            
         }
         catch(e){
-            console.log(e)
+            
             
             alert("Dados incorretos")
-           
+            
         }
         
         }

@@ -1,6 +1,6 @@
 import {React, useState, useEffect, useRef } from 'react'
 import { TextInput, StyleSheet, TouchableHighlight, View, Text } from 'react-native';
-import { Row, VStack } from 'native-base';
+import { Input, Row, VStack } from 'native-base';
 import { NativeBaseProvider, Heading , Center, Box, Image, Button} from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native-web';
@@ -10,6 +10,8 @@ import logout from '../src/images/logout.png'
 import menu from '../src/images/menu.png'
 import { useNavigate, createBrowserRouter } from 'react-router-dom';
 import App from '../App';
+import axios from 'axios';
+import JsonDataDisplay from './helpers/table';
 
 
 
@@ -25,7 +27,10 @@ export function HomeScreen (){
     
   // ]);
 
-  
+// const [registros, setRegistros] = useState("0")
+
+
+
   const navigate = useNavigate () 
   
   const [movimentation, setMovimentation] = useState(1)
@@ -48,11 +53,19 @@ export function HomeScreen (){
     
   }
 
+//  async function requirement (){ 
+//     const registros = await axios.get("http://localhost:3000/api/v1")
+//       const filterReg = registros.data
+//       setRegistros(filterReg)
+      
+//   }
   
-   getData()
+getData()
+   
+
 
    useEffect(()=> {
-    if (response == null && statusq == null && movimentation<1){
+    if (response == null && statusq == null && movimentation<=1){
       navigate("/")
       
     }} , [movimentation]);
@@ -69,13 +82,7 @@ export function HomeScreen (){
           
             <Image source={require('../src/images/LOGO VERTICAL COLORIDA.png')} alt="React Logo" size={100}  resizeMode='contain' marginLeft={20} marginTop={10} borderRadius={10}/>
           <View >
-                {
-
-                }
-              {/* {botoes(currentButton, setCurrentButton, "Home", home)}
-            
-              {botoes (currentButton, setCurrentButton, "Realizados", history)}
-                        */}
+                
           <TouchableOpacity style={{margin:10}}>
               <View style={{flexDirection: "row", alignItems: "center", paddingVertical: 8, paddingLeft: 20  ,backgroundColor: "white", width: '25vH', borderRadius: 10, borderWidth:1,
                shadowColor: '#000', shadowOffset: {
@@ -85,7 +92,7 @@ export function HomeScreen (){
                                                   shadowOpacity: 0.41,
                                                   shadowRadius: 9.11,
 
-elevation: 14 }} >
+                                                    elevation: 14 }} >
                 <Image source={home} style={{width:20, height: 20 , justifyContent: 'center', alignItems:'center'}}></Image>
                 <Text style={{fontSize: 15, fontWeight: 'bold', paddingLeft: '20%'}}>Home</Text>
               </View>
@@ -107,8 +114,8 @@ elevation: 14 }} >
 
 
          </View>
-         <View style={{paddingTop:"60vh"}}>
-           <TouchableOpacity style={{margin:10}} onPress={()=>{
+         <View style={{paddingTop:"65vh"}}>
+           <TouchableOpacity style={{margin:10 }} onPress={()=>{
               AsyncStorage.clear()
               
               setMovimentation(0)
@@ -132,10 +139,9 @@ elevation: 14 }} >
                     
                     elevation: 24, }}>
            <Text style={{justifyContent: 'center', alignItems:'center', margin:10, fontSize:35, fontWeight: 'bold'}}>Home</Text>
-          
-
-           
-
+           <View style={{marginLeft:10, marginRight: 10}}>
+            <JsonDataDisplay />
+          </View>
 
 
       </View>

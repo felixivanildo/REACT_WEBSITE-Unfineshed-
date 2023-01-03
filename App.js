@@ -6,6 +6,7 @@ import { createBrowserRouter,
   RouterProvider, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { connection } from './screens/user_verify';
 import { HomeScreen } from './screens/Home';
+import  Management  from './screens/Resolution.js'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -24,7 +25,12 @@ const router = createBrowserRouter([
   {
     path: "/Home",
     element: <HomeScreen/>
+  },
+  {
+    path: "/Resolve",
+    element: <Management/>
   }
+
 ]);
 
   
@@ -60,7 +66,7 @@ function Home() {
   
       }
 
-      setingSun().finally(
+      setingSun().then(
         navigate("/home")
       )
     }} , [count]);
